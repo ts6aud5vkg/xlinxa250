@@ -91,5 +91,9 @@ RUN wget -cO - https://raw.githubusercontent.com/gdraheim/docker-systemctl-repla
     ln -s /usr/local/share/docker-systemctl-replacement/files/docker/systemctl3.py /usr/local/bin/systemctl; \
     export PATH=/usr/local/bin/:$PATH;
 
-COPY auto_setup.sh /opt/xilinx/auto_setup.sh
-COPY .bashrc /root/.bashrc
+WORKDIR /venv
+COPY auto_setup.sh /venv
+COPY .bashrc /venv
+RUN chmod a+x /venv/*
+CMD ./auto_setup.sh
+
